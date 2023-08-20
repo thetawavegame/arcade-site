@@ -5,9 +5,10 @@ import argparse
 from pathlib import Path
 from typing import Optional, Sequence
 import shutil
+import sys
 import logging
 
-LOGGER = logging.getLogger(__name__)
+LOGGER = logging.getLogger("metalmancySiteBuilder")
 
 
 @enum.unique
@@ -18,6 +19,7 @@ class AppTier(str, enum.Enum):
 
 class CLIArgs(argparse.Namespace):
     tier: AppTier
+    verbosity: int
 
 
 def our_parser() -> argparse.ArgumentParser:
@@ -32,10 +34,23 @@ def our_parser() -> argparse.ArgumentParser:
         choices=[x.value for x in AppTier.__members__.values()],
         type=AppTier,
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        help="Verbosity of stdout logging",
+        action="count",
+        default=0,
+        dest="verbosity",
+    )
     return parser
 
 
 def run(args: CLIArgs) -> None:
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=logging.DEBUG if (args.verbosity > 0) else logging.ERROR,
+    )
+    LOGGER.info(f"Building arcade site with {args=}")
     base_dir = Path(__file__).parent
     config_fname = f"netlify_{args.tier.value}.toml"
     config_file = base_dir / config_fname
