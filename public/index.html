@@ -2,39 +2,25 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <style>
-      body {
-        margin: 0;
-        background: rgb(39, 0, 71);
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      canvas {
-        background-color: white;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: x-large;
-        width: 80%;
-        height: 20%;
-        background-color: rgb(0, 128, 128);
-        color: rgb(218, 165, 32);
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      .title {
-        color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <title>Thetawave</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
   </head>
 
   <body>
-    <button id="buttonToTriggerGame" type="button" onClick="location.href='/thetawave'">Click to Play Thetawave!</button>
+    <div class="screen scanlines">
+      <div class="flexbox hcenter screen-content">
+        <div id="logo-container" class="hcenter">
+          <img src="logo.gif" width="800"  alt="logo"/>
+        </div>
+        <div id="link-container" class="flexbox hcenter">
+          <div class="hdiv"></div>
+          <a href="/thetawave">Play</a>
+          <div class="hdiv"></div>
+          <a href="https://github.com/thetawavegame" target="_blank">Source Code</a>
+          <div class="hdiv"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
